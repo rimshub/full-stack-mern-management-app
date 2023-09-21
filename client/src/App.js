@@ -46,6 +46,5 @@ function App() {
     </>
   );
 }
-// text-3xl text-gray-700 font-bold mb-5
 
 export default App;
