@@ -108,16 +108,14 @@ const Mutation = new GraphQLObjectType({
                 description: { type: GraphQLNonNull(GraphQLString) },
                 status: {
                     type: new GraphQLEnumType({
-                        name: 'Status',
+                        name: 'ProjectStatus',
                         values: {
-                            INACTIVE: { value: 'inactive' },
-                            ACTIVE: { value: 'active' },
-
-                            IN_PROGRESS: { value: 'in progress' },
-                            COMPLETED: { value: 'completed' },
+                            'new': { value: 'Not Started' },
+                            'progress': { value: 'In Progress' },
+                            'completed': { value: 'Completed' },
                         }
                     }),
-                    defaultValue: 'inactive',
+                    defaultValue: 'Not Started',
                 },
                 clientId: { type: GraphQLNonNull(GraphQLID) },
             },
@@ -139,13 +137,11 @@ const Mutation = new GraphQLObjectType({
                 description: { type: (GraphQLString) }, // do not want to specify all fields
                 status: {
                     type: new GraphQLEnumType({
-                        name: 'StatusUpdate',
+                        name: 'ProjectStatusUpdate',
                         values: {
-                            INACTIVE: { value: 'inactive' },
-                            ACTIVE: { value: 'active' },
-
-                            IN_PROGRESS: { value: 'in progress' },
-                            COMPLETED: { value: 'completed' },
+                            'new': { value: 'Not Started' },
+                            'progress': { value: 'In Progress' },
+                            'completed': { value: 'Completed' },
                         }
                     }),
                 },
@@ -220,6 +216,12 @@ const Mutation = new GraphQLObjectType({
                 id: { type: GraphQLNonNull(GraphQLID) },
             },
             resolve(parent, args) {
+                Project.find({ clientId: args.id }).then((projects) => {
+                    projects.forEach((project) => {
+                        project.deleteOne(); // remove is not a function it throws error
+                    });
+                });
+
                 return Client.findByIdAndRemove(args.id);
             },
         },

@@ -15,7 +15,7 @@ const ProjectSchema = new mongoose.Schema({ // takes an object
     },
     status: {
         type: String,
-        enum: ['active', 'inactive', 'in progress', "completed"],
+        enum: ['Not Started', 'In Progress', 'Completed'],
     },
     clientId: {
         // this is a reference to the client model
