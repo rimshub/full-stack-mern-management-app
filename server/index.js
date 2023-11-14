@@ -24,6 +24,10 @@ connectDB();
 
 app.use(cors({
     origin: 'https://project-manager-rimshub.vercel.app',
+    methods: ['POST', 'GET', 'DELETE', 'PUT', 'PATCH', 'OPTIONS', 'HEAD'],
+    credentials: true,
+    optionsSuccessStatus: 204
+
 }));
 // middleware to use graphql
 app.use('/graphql', graphqlHTTP({
