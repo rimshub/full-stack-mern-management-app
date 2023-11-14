@@ -6,6 +6,8 @@ import Project from './Pages/Project';
 import NotFound from './Pages/NotFound';
 import Header from './components/Header';
 
+import bgImg from './assets/bg.jpg';
+
 const cache = new InMemoryCache({
   typePolicies: {
     Query: {
@@ -32,16 +34,29 @@ function App() {
   return (
     <>
       <Router>
-        <ApolloProvider client={client}>
-          <Header />  
-          <div className="font-mono container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/projects/:id" element={<Project />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
-        </ApolloProvider>
+        <div className='overflow-hidden relative'
+          style={{
+            backgroundImage: `url(${bgImg})`,
+            // backgroundImage: `url(${externalImage})`,
+            backgroundSize: 'cover',
+            zIndex: '-1',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            position: 'absolute',
+            width: '100%',
+            height: '100vh',
+          }}>
+          <ApolloProvider client={client} >
+            <Header />
+            <div className="font-mono container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/projects/:id" element={<Project />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+          </ApolloProvider>
+        </div>
       </Router>
     </>
   );
