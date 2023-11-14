@@ -22,7 +22,9 @@ const app = express()
 // connect to db
 connectDB();
 
-app.use(cors());
+app.use(cors({
+    origin: 'https://project-manager-rimshub.vercel.app',
+}));
 // middleware to use graphql
 app.use('/graphql', graphqlHTTP({
     schema,
