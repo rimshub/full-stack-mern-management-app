@@ -27,7 +27,7 @@ const cache = new InMemoryCache({
   }
 });
 const client = new ApolloClient({
-  uri: 'http://project-manager-rimshub.vercel.app/graphql',
+  uri: 'https://project-manager-rimshub.vercel.app/graphql',
   cache: cache,
 });
 function App() {
