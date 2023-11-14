@@ -27,7 +27,7 @@ const cache = new InMemoryCache({
   }
 });
 const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql',
+  uri: 'https://pro-manager-server.vercel.app/',
   cache: cache,
 });
 function App() {
@@ -37,7 +37,6 @@ function App() {
         <div className='overflow-hidden relative'
           style={{
             backgroundImage: `url(${bgImg})`,
-            // backgroundImage: `url(${externalImage})`,
             backgroundSize: 'cover',
             zIndex: '-1',
             backgroundRepeat: 'no-repeat',
